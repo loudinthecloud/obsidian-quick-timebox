@@ -1,8 +1,242 @@
-/*
+/* ===================================================
+   Time Planner — Block Styles
+   =================================================== */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.quicktimebox-container {
+	--quicktimebox-now-color: #e03c3c;
 
-If your plugin does not need CSS, delete this file.
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	overflow: hidden;
+	background: var(--background-primary);
+	margin: 0.4em 0;
+	font-family: var(--font-interface);
+}
 
-*/
+/* Header */
+.quicktimebox-header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 7px 14px;
+	background: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+	gap: 8px;
+}
+
+.quicktimebox-header-range {
+	font-size: 0.82em;
+	font-weight: 600;
+	color: var(--text-normal);
+	letter-spacing: 0.01em;
+}
+
+/* Header is always LTR so pills stay on the visual left regardless of note direction */
+.quicktimebox-rtl .quicktimebox-header {
+	direction: ltr;
+}
+
+.quicktimebox-header-gran {
+	font-size: 0.75em;
+	color: var(--text-muted);
+	background: var(--background-modifier-hover);
+	padding: 2px 8px;
+	border-radius: 20px;
+	white-space: nowrap;
+}
+
+/* Grid */
+.quicktimebox-grid {
+	display: flex;
+	flex-direction: column;
+}
+
+.quicktimebox-row {
+	display: grid;
+	grid-template-columns: 58px 1fr;
+	min-height: 28px;
+	border-bottom: 1px solid var(--background-modifier-border-hover);
+}
+
+.quicktimebox-row:last-child {
+	border-bottom: none;
+}
+
+/* Hour-boundary rows get a bold top border */
+.quicktimebox-row--hour:not(:first-child) {
+	border-top: 2px solid var(--background-modifier-border);
+}
+
+/* Time label */
+.quicktimebox-label {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-end;
+	padding: 5px 9px 5px 4px;
+	font-size: 0.73em;
+	font-variant-numeric: tabular-nums;
+	color: var(--text-faint);
+	border-right: 1px solid var(--background-modifier-border-hover);
+	user-select: none;
+	white-space: nowrap;
+	line-height: 18px;
+	flex-shrink: 0;
+}
+
+.quicktimebox-row--hour .quicktimebox-label {
+	color: var(--text-muted);
+	font-weight: 700;
+	border-right: 1px solid var(--background-modifier-border-hover);
+}
+
+/* Entry textarea */
+.quicktimebox-entry {
+	resize: none;
+	border: none;
+	outline: none;
+	background: transparent;
+	font-family: var(--font-text);
+	font-size: 0.88em;
+	color: var(--text-normal);
+	padding: 4px 12px;
+	width: 100%;
+	box-sizing: border-box;
+	height: var(--quicktimebox-entry-height, auto);
+	min-height: 28px;
+	overflow: hidden;
+	line-height: 1.5;
+	display: block;
+}
+
+.quicktimebox-entry:focus {
+	background: var(--background-secondary-alt);
+}
+
+/* Now-line toggle button */
+.quicktimebox-now-toggle {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 7px 2px 5px;
+	border-radius: 20px;
+	border: 1px solid var(--background-modifier-border);
+	background: transparent;
+	cursor: pointer;
+	color: var(--text-faint);
+	font-size: 0.72em;
+	line-height: 1;
+	box-shadow: none;
+	transition: color 0.15s, border-color 0.15s;
+}
+
+.quicktimebox-now-toggle-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: currentColor;
+	flex-shrink: 0;
+}
+
+.quicktimebox-now-toggle-label {
+	font-variant-numeric: tabular-nums;
+}
+
+.quicktimebox-now-toggle--on {
+	color: var(--quicktimebox-now-color);
+	border-color: color-mix(in srgb, var(--quicktimebox-now-color) 27%, transparent);
+}
+
+/* Now line */
+.quicktimebox-now-line--hidden {
+	display: none;
+}
+
+.quicktimebox-grid {
+	position: relative;
+}
+
+.quicktimebox-now-line {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--quicktimebox-now-color);
+	pointer-events: none;
+	z-index: 5;
+	transform: translateY(-1px);
+}
+
+.quicktimebox-now-line::before {
+	content: '';
+	position: absolute;
+	left: -1px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--quicktimebox-now-color);
+}
+
+.quicktimebox-rtl .quicktimebox-now-line::before {
+	left: auto;
+	right: -1px;
+}
+
+/* Error state */
+.quicktimebox-error {
+	color: var(--text-error);
+	padding: 10px 14px;
+	font-size: 0.88em;
+	margin: 0;
+}
+
+/* ===================================================
+   RTL Support
+   =================================================== */
+
+.quicktimebox-rtl .quicktimebox-row {
+	/* Keep 58px 1fr — with direction:rtl the track order reverses,
+	   so 58px lands on the right and 1fr on the left. */
+	grid-template-columns: 58px 1fr;
+	direction: rtl;
+}
+
+.quicktimebox-rtl .quicktimebox-label {
+	border-right: none;
+	border-left: 1px solid var(--background-modifier-border-hover);
+	justify-content: flex-start;
+}
+
+.quicktimebox-rtl .quicktimebox-row--hour .quicktimebox-label {
+	border-left: 1px solid var(--background-modifier-border-hover);
+}
+
+.quicktimebox-rtl .quicktimebox-entry {
+	text-align: right;
+}
+
+/* ===================================================
+   Create Dialog
+   =================================================== */
+
+.quicktimebox-modal-preview-row {
+	display: flex;
+	justify-content: center;
+	padding: 4px 0 12px;
+}
+
+.quicktimebox-modal-preview {
+	font-size: 0.82em;
+	background: var(--background-secondary);
+	padding: 3px 14px;
+	border-radius: 20px;
+}
+
+.quicktimebox-modal-preview--ok {
+	color: var(--text-muted);
+}
+
+.quicktimebox-modal-preview--error {
+	color: var(--text-error);
+}
