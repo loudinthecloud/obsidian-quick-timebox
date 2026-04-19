@@ -24,6 +24,27 @@ QuickTimeBox renders a structured time grid inside your Obsidian note. Each row 
 
 ---
 
+## Installation (from source)
+
+1. Navigate to your vault's plugins folder:
+    ```
+    <your-vault>/.obsidian/plugins/
+    ```
+2. Clone the repository:
+    ```bash
+    git clone https://github.com/loudinthecloud/obsidian-quick-timebox
+    ```
+3. Install dependencies and build:
+    ```bash
+    cd obsidian-quick-timebox
+    npm install
+    npm run build
+    ```
+4. Reload Obsidian
+5. Go to **Settings → Community plugins**, find **QuickTimeBox**, and enable it.
+
+---
+
 ## Usage
 
 Add a fenced code block with the language tag `quicktimebox`:
