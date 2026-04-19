@@ -7,7 +7,7 @@ export default class QuickTimeBoxPlugin extends Plugin {
 	onload() {
 		this.addCommand({
 			id: "insert",
-			name: "Insert time planner",
+			name: "Insert timeboxing",
 			editorCallback: (editor: Editor) => {
 				new QuickTimeBoxModal(this.app, editor).open();
 			},
@@ -22,7 +22,7 @@ export default class QuickTimeBoxPlugin extends Plugin {
 					if (!data.entries) data.entries = {};
 				} catch {
 					el.createEl("p", {
-						text: "Invalid time planner data.",
+						text: "Invalid timeboxing data.",
 						cls: "quicktimebox-error",
 					});
 					return;

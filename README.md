@@ -47,7 +47,11 @@ QuickTimeBox renders a structured time grid inside your Obsidian note. Each row 
 
 ## Usage
 
-Add a fenced code block with the language tag `quicktimebox`:
+Use the `QuickTimeBox: Insert timeboxing` command on any note.
+
+![QuickTimeBox Create](docs/create-timeboxing.png)
+
+This will add a fenced code block with the language tag `quicktimebox`:
 
 ````
 ```quicktimebox

@@ -27,7 +27,7 @@ export class QuickTimeBoxModal extends Modal {
 	onOpen() {
 		const { contentEl } = this;
 		contentEl.addClass("quicktimebox-create-modal");
-		this.titleEl.setText("Create time planner");
+		this.titleEl.setText("Create timeboxing");
 
 		let slotCountEl: HTMLElement;
 
